@@ -1,0 +1,20 @@
+{
+    "future_research": [
+        "future studies", "future research", "warrants investigation", "should investigate", "further research", "further studies", "additional research", "more research", "future work"
+    ],
+    "limitations": [
+        "limitation", "limited by", "sample size", "retrospective", "single-centre", "selection bias", "follow-up duration", "missing data"
+    ],
+    "uncertainty": [
+        "remains unknown", "unclear", "uncertain", "poorly understood", "inconclusive", "not established"
+    ],
+    "contradiction": [
+        "conflicting evidence", "inconsistent findings", "differs from", "previous studies", "in contrast", "disagreement"
+    ],
+    "evidence_weakness": [
+        "insufficient evidence", "underpowered", "lack of randomized trials", "small cohorts", "low quality evidence"
+    ],
+    "population_indicators": [
+        "pediatric", "geriatric", "lmic", "multicentre", "minority population", "female", "rural"
+    ]
+}
