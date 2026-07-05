@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-light text-slate-800 antialiased;
+  }
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent;
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-br from-brand-dark via-brand-primary to-brand-accent;
+}
