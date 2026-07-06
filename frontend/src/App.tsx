@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import SearchBuilder from './pages/SearchBuilder';
 import DeepExplore from './pages/DeepExplore';
+import LiteratureToolkit from './pages/LiteratureToolkit';
+import ResearchSuggestions from './pages/ResearchSuggestions';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/literature-toolkit" element={<LiteratureToolkit />} />
+              <Route path="/research-suggestions" element={<ResearchSuggestions />} />
               <Route path="/search-builder" element={<SearchBuilder />} />
               <Route path="/deep-explore" element={<DeepExplore />} />
             </Route>

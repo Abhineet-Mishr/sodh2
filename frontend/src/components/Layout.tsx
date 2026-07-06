@@ -1,7 +1,7 @@
 
 import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { BrainCircuit, Search, Database, LogOut, User } from 'lucide-react';
+import { BrainCircuit, Search, Database, LogOut, User, Library, Lightbulb } from 'lucide-react';
 
 const Layout: React.FC = () => {
   const { user, logout } = useAuth();
@@ -15,6 +15,8 @@ const Layout: React.FC = () => {
 
   const navItems = [
     { name: 'Dashboard', path: '/', icon: BrainCircuit },
+    { name: 'Literature Toolkit', path: '/literature-toolkit', icon: Library },
+    { name: 'Research Suggestions', path: '/research-suggestions', icon: Lightbulb },
     { name: 'Deep Explore', path: '/deep-explore', icon: Database },
     { name: 'Search Builder', path: '/search-builder', icon: Search },
   ];

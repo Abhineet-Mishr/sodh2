@@ -1,3 +1,5 @@
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parents[2]
 from pydantic_settings import BaseSettings, SettingsConfigDict
 import os
 
@@ -54,3 +56,48 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=True, extra="ignore")
 
 settings = Settings()
+
+TEMP_DIR = BASE_DIR / "tmp"
+LOG_DIR = BASE_DIR / "logs"
+
+MAX_UPLOAD_RECORDS = 50_000
+PREVIEW_ROWS = 20
+FUZZY_THRESHOLD_HIGH = 98
+FUZZY_THRESHOLD_LIKELY = 95
+FUZZY_THRESHOLD_POSSIBLE = 90
+
+STANDARD_FIELDS = [
+    "title",
+    "authors",
+    "year",
+    "journal",
+    "doi",
+    "abstract",
+    "keywords",
+    "pmid",
+    "source_database",
+]
+
+SCREENING_COLUMNS = [
+    "Title",
+    "Authors",
+    "Year",
+    "Journal",
+    "DOI",
+    "PMID",
+    "Abstract",
+    "Keywords",
+    "Database Source",
+    "Include",
+    "Exclude",
+    "Maybe",
+    "Reason for Exclusion",
+    "Reviewer",
+    "Notes",
+]
+
+LLM_PROVIDER = "gemini"
+GEMINI_MODEL = "gemini-2.5-flash"
+FEATURE_A_CREDITS = 4
+CONVERT_CREDITS = 1
+DEDUPLICATE_CREDITS = 4
