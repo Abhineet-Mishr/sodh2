@@ -1,8 +1,6 @@
-import { useAuth } from "../context/AuthContext";
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { convertFile, deduplicateFiles, finalizeReview, saveReviewDecisions, updateFuzzyThreshold } from '../lib/literature_api'
 import type { ConvertResponse, DeduplicateResponse, PreviewRow, ProcessingReport } from '../types/literature'
-import { ResearchSuggestionsPage } from '../features/research_suggestions'
 
 const conversionOptions = [
   { value: 'RIS_TO_CSV', label: 'RIS -> CSV' },
@@ -29,7 +27,6 @@ const sensitivityModes = [
 ] as const
 
 type TabKey = 'convert' | 'dedupe'
-type MainTabKey = 'literature-toolkit' | 'research-suggestions'
 type SensitivityMode = (typeof sensitivityModes)[number]['value']
 
 function thresholdForMode(mode: SensitivityMode, customThreshold: number) {
@@ -50,7 +47,6 @@ function buildDecisionMap(preview: PreviewRow[]): Record<string, 'Keep A' | 'Kee
 }
 
 export default function LiteratureToolkit() {
-  const [activeMainTab, setActiveMainTab] = useState<MainTabKey>('literature-toolkit')
   const [activeTab, setActiveTab] = useState<TabKey>('convert')
   const [convertFileInput, setConvertFileInput] = useState<File | null>(null)
   const [conversion, setConversion] = useState(conversionOptions[0].value)
@@ -141,8 +137,7 @@ export default function LiteratureToolkit() {
     setSavingReview(true)
     setStatus('Saving review decisions...')
     try {
-      const result = await saveReviewDecisions(dedupeResult.job_id, reviewDecisions)
-      setDedupeResult((current) => (current ? { ...current, review_preview: result.review_preview as PreviewRow[] } : current))
+      await saveReviewDecisions(dedupeResult.job_id, reviewDecisions)
       setStatus('Review decisions saved.')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save review decisions')
@@ -203,27 +198,7 @@ export default function LiteratureToolkit() {
 
   return (
     <div className="flex flex-col">
-      {/* Mobile Navigation */}
-      <div className="md:hidden border-t border-slate-200 flex p-2 overflow-x-auto gap-2">
-         {(['literature-toolkit', 'research-suggestions'] as MainTabKey[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveMainTab(tab)}
-                className={`flex-shrink-0 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  activeMainTab === tab
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                }`}
-              >
-                {tab === 'literature-toolkit' ? 'Literature Toolkit' : 'Research Suggestions'}
-              </button>
-          ))}
-      </div>
-
       <main className="flex-1 mx-auto max-w-7xl px-6 py-8 w-full">
-        {activeMainTab === 'research-suggestions' ? (
-          <ResearchSuggestionsPage />
-        ) : (
           <div className="animate-fade-in">
             <div className="mb-8">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Literature Toolkit</h1>
@@ -611,7 +586,6 @@ export default function LiteratureToolkit() {
           </section>
         )}
           </div>
-        )}
       </main>
     </div>
   )
