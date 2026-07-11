@@ -29,3 +29,11 @@ app.include_router(deep_explore.router, prefix=f"{settings.API_V1_STR}/deep-expl
 @app.get("/")
 def root():
     return {"message": "Welcome to SODH API"}
+
+from app.routers import convert, deduplicate, download, review, research_suggestions
+
+app.include_router(convert.router)
+app.include_router(deduplicate.router)
+app.include_router(download.router)
+app.include_router(review.router)
+app.include_router(research_suggestions.router)
